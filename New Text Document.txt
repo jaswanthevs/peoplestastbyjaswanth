@@ -1,0 +1,163 @@
+java script :
+
+const restaurantData = [
+    {
+        name: "Burger Paradise",
+        area: "nyc-manhattan",
+        image: "images/burger.jpg",
+        dish: "Juicy Burger",
+        address: "123 Main St, Manhattan",
+        googleMaps: "https://www.google.com/maps/place/Burger+Paradise",
+        rating: 0
+    },
+    {
+        name: "Midtown Pies",
+        area: "nyc-manhattan",
+        image: "images/pizza.jpg",
+        dish: "Pepperoni Pizza",
+        address: "456 Broadway, Manhattan",
+        googleMaps: "https://goo.gl/maps/example",
+        rating: 0
+    }
+    // Add more restaurant objects...
+];
+
+function generateRestaurantCards(areaId) {
+    const restaurantContainer = document.getElementById(areaId);
+    restaurantContainer.innerHTML = '';
+
+    const filteredRestaurants = restaurantData.filter(restaurant => restaurant.area === areaId);
+
+    filteredRestaurants.forEach(restaurant => {
+        const restaurantCard = `
+            <div class="restaurant">
+                <h4>${restaurant.name}</h4>
+                <img src="${restaurant.image}" alt="${restaurant.dish}">
+                <p><strong>Dish:</strong> ${restaurant.dish}</p>
+                <p><strong>Address:</strong> ${restaurant.address}</p>
+                <a href="${restaurant.googleMaps}" target="_blank">View on Google Maps</a>
+            </div>
+        `;
+        restaurantContainer.innerHTML += restaurantCard;
+    });
+}
+
+function showAreas(cityId) {
+    document.querySelectorAll('.area-list').forEach(list => list.style.display = 'none');
+    document.getElementById(cityId).style.display = 'block';
+    document.getElementById('restaurant-display').style.display = 'none';
+}
+
+function showRestaurants(areaId) {
+    document.getElementById('restaurant-display').style.display = 'block';
+    generateRestaurantCards(areaId);
+}
+
+function toggleSection(sectionId) {
+    const sections = ['about-me', 'about-website', 'our-mission', 'contacts'];
+    sections.forEach(section => {
+        const element = document.getElementById(section);
+        if (section === sectionId) {
+            element.style.display = element.style.display === 'block' ? 'none' : 'block';
+        } else {
+            element.style.display = 'none';
+        }
+    });
+}
+
+
+
+html :<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Food Treasure - For Food Lovers</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="javacode.js" defer></script>
+</head>
+<body>
+    <header>
+        <header>
+            <div class="logo-container">
+                <img src="./log22.png" alt="People's Taste Logo" class="logo">
+            </div>
+        </header>
+        
+        
+        
+    </header>
+    
+    <div class="info-section" id="info-sectionstyel">
+        <div class="button-container">
+            <button onclick="toggleSection('about-me')">About Me</button>
+            <button onclick="toggleSection('about-website')">About Website</button>
+            <button onclick="toggleSection('our-mission')">Our Mission</button>
+            <button class="hbutton" onclick="toggleSection('contacts')">Contacts</button>
+        </div>
+
+        <div id="about-me" class="about-me" style="display:none;">
+            <h2>About Me</h2>
+            <p>Hi! I'm [Your Name], a food enthusiast and blogger who loves to explore new flavors and culinary experiences. Join me on my journey to discover the best dishes and hidden gems in the food world!</p>
+        </div>
+
+        <div id="about-website" class="about-website" style="display:none;">
+            <h2>About Website</h2>
+            <p>This website aims to connect food lovers with the best dining experiences, helping them find delicious food in their city.</p>
+        </div>
+
+        <div id="our-mission" class="our-mission" style="display:none;">
+            <h2>Our Mission</h2>
+            <p>To explore, share, and celebrate the diverse culinary landscape, making dining enjoyable for everyone.</p>
+        </div>
+
+        <div id="contacts" class="contacts" style="display:none;">
+            <h2>Contacts</h2>
+            <p>Email: contact@foodtreasure.com</p>
+            <p>Phone: (123) 456-7890</p>
+        </div>
+    </div>
+
+    <section class="city-area-food" id="city-selection">
+        <h2>Select Your City</h2>
+        <div class="city-list">
+            <button class="city-btn" onclick="showAreas('nyc')">New York</button>
+            <button class="city-btn" onclick="showAreas('la')">Los Angeles</button>
+            <button class="city-btn" onclick="showAreas('chi')">Chicago</button>
+        </div>
+
+        <div id="nyc" class="area-list" style="display:none;">
+            <h3>Areas in New York</h3>
+            <button class="area-btn" onclick="showRestaurants('nyc-manhattan')">Manhattan</button>
+            <button class="area-btn" onclick="showRestaurants('nyc-brooklyn')">Brooklyn</button>
+        </div>
+
+        <div id="la" class="area-list" style="display:none;">
+            <h3>Areas in Los Angeles</h3>
+            <button class="area-btn" onclick="showRestaurants('la-hollywood')">Hollywood</button>
+            <button class="area-btn" onclick="showRestaurants('la-santamonica')">Santa Monica</button>
+        </div>
+
+        <div id="chi" class="area-list" style="display:none;">
+            <h3>Areas in Chicago</h3>
+            <button class="area-btn" onclick="showRestaurants('chi-downtown')">Downtown</button>
+            <button class="area-btn" onclick="showRestaurants('chi-lincolnpark')">Lincoln Park</button>
+        </div>
+
+        <section id="restaurant-display" style="display:none;">
+            <h2>Restaurants and Dishes</h2>
+            <div id="nyc-manhattan" class="restaurant-list" style="display:none;"></div>
+            <div id="nyc-brooklyn" class="restaurant-list" style="display:none;"></div>
+            <div id="la-hollywood" class="restaurant-list" style="display:none;"></div>
+            <div id="la-santamonica" class="restaurant-list" style="display:none;"></div>
+<!-- Add more areas as needed -->
+
+        </section>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Food Treasure. All rights reserved.</p>
+    </footer>
+</body>
+</html>
