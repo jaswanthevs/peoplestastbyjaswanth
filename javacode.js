@@ -17,6 +17,14 @@ const restaurantData = [
         googleMaps: "https://goo.gl/maps/example",
         rating: 0
     }
+    name: "nice  Pies",
+        area: "nyc-manhattan",
+        image: "images/pizza.jpg",
+        dish: "Pepperoni Pizza",
+        address: "456 Broadway, Manhattan",
+        googleMaps: "https://goo.gl/maps/example",
+        rating: 0
+    }
     // Add more restaurant objects...
 ];
 
